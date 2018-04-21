@@ -1,10 +1,8 @@
-Facter.add("name_servers") do
+Facter.add(:nameservers) do
         setcode do
-            pattern=/^[ \t]*nameserver[\t ]+(\d+\.\d+\.\d+\.\d+)/
-            fic = File.new("/etc/resolv.conf", "r")
-            m=fic.read.scan(pattern)
-            fic.close
-            (defined? m) ? m.join(',') : nil 
+            pattern = /^[ \t]*nameserver[\t ]+(\d+\.\d+\.\d+\.\d+)/
+            m = File.read('/etc/resolv.conf').scan(pattern).flatten
+            (defined? m) ? m.join(',') : nil
         end
 end
 
