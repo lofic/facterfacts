@@ -1,4 +1,1 @@
-Facter.add("ipv6") do
-    setcode { res = File.exist?('/proc/sys/net/ipv6') ? 'true' : 'false' }
-end
-
+Facter.add('ipv6') { setcode { File.exists?('/proc/sys/net/ipv6') } }
